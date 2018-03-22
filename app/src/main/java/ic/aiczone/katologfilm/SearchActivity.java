@@ -3,19 +3,19 @@ package ic.aiczone.katologfilm;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -27,7 +27,7 @@ import ic.aiczone.katologfilm.utils.AsyncTaskUtils;
  * Created by aic on 26/02/18.
  */
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Films>> {
+public class SearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Films>> {
 
     ListView listView;
     FilmAdapter adapter;
@@ -70,6 +70,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.act_change_settings){
+            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(mIntent);
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public Loader<ArrayList<Films>> onCreateLoader(int id, Bundle args) {
 
         String sFilm = "";
@@ -101,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             Bundle bundle = new Bundle();
             bundle.putString(EXTRAS_FILM, film);
-            getLoaderManager().restartLoader(0, bundle, MainActivity.this);
+            getLoaderManager().restartLoader(0, bundle, SearchActivity.this);
         }
     };
 }

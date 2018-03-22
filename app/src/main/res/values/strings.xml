@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Katolog Film</string>
-    <string name="lb_cari">Cari</string>
+    <string name="lb_cari">Find</string>
+    <string name="lb_change_settings">Change Settings</string>
+
+    <string name="hint_cari">Enter movie title</string>
 </resources>

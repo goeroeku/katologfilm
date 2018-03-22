@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 import ic.aiczone.katologfilm.models.Films;
 import ic.aiczone.katologfilm.utils.Tools;
 
+import static ic.aiczone.katologfilm.BuildConfig.IMAGE_URL;
+
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -28,7 +30,7 @@ public class DetailActivity extends AppCompatActivity {
         Films film = gson.fromJson(strObj, Films.class);
 
         ImageView ivCover = findViewById(R.id.ivCover);
-        Picasso.with(this).load("http://image.tmdb.org/t/p/w185" + film.getLinkImage()).into(ivCover);
+        Picasso.with(this).load( IMAGE_URL + "/w185" + film.getLinkImage()).into(ivCover);
 
         TextView tvCode = findViewById(R.id.tvCode);
         tvCode.setText("[ Kode : " + Integer.toString(film.getId()) + " ]");

@@ -15,7 +15,7 @@ import cz.msebera.android.httpclient.Header;
 import ic.aiczone.katologfilm.models.Films;
 
 import static ic.aiczone.katologfilm.BuildConfig.API_KEY;
-import static ic.aiczone.katologfilm.BuildConfig.BASE_URL;
+import static ic.aiczone.katologfilm.BuildConfig.API_URL;
 
 /**
  * Created by aic on 26/02/18.
@@ -68,7 +68,7 @@ public class AsyncTaskUtils extends android.content.AsyncTaskLoader<ArrayList<Fi
 
         final ArrayList<Films> filmItems = new ArrayList<>();
         //String url = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + sFilms;
-        String url = BASE_URL + "?api_key=" + API_KEY + "&language=en-US&query=" + sFilms; //di pindah ke build.gradle
+        String url = API_URL + "/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + sFilms; //di pindah ke build.gradle
 
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
