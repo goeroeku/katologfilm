@@ -47,7 +47,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void init() {
-        getSupportActionBar().setTitle("Detail Film");
+        getSupportActionBar().setTitle(getString(R.string.lb_form_detail));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

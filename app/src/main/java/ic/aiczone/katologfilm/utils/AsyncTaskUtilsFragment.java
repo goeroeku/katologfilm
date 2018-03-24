@@ -1,8 +1,8 @@
 package ic.aiczone.katologfilm.utils;
 
 
-import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.support.v4.content.AsyncTaskLoader;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
@@ -22,14 +22,14 @@ import static ic.aiczone.katologfilm.BuildConfig.API_URL;
  * Created by aic on 26/02/18.
  */
 
-public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
+public class AsyncTaskUtilsFragment extends AsyncTaskLoader<ArrayList<Films>> {
     private ArrayList<Films> mData;
     private boolean mHasResult = false;
 
     private String sFilms;
     private String sFeature = "/search/movie";
 
-    public AsyncTaskUtils(final Context context, String sFilms, String sFeature) {
+    public AsyncTaskUtilsFragment(final Context context, String sFilms, String sFeature) {
         super(context);
 
         onContentChanged();
@@ -73,7 +73,7 @@ public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
         final ArrayList<Films> filmItems = new ArrayList<>();
         //String url = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + sFilms;
         String sFilter = "";
-        if (!sFilms.equals(""))
+        if (sFilms != null && !sFilms.equals(""))
             sFilter = "&query=" + sFilms;
 
         String url = API_URL + sFeature + "?api_key=" + API_KEY + "&language=en-US" + sFilter; //di pindah ke build.gradle

@@ -27,7 +27,7 @@
             android:id="@+id/bnCari"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/lb_cari"
+            android:text="@string/lb_button_find"
             android:layout_weight="0.2"
             />
     </LinearLayout>

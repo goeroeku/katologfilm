@@ -2,7 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/act_cari"
+        android:title="@string/lb_menu_find"
+        app:showAsAction="never"></item>
+    <item
         android:id="@+id/act_change_settings"
-        android:title="@string/lb_change_settings"
+        android:title="@string/lb_menu_change_settings"
         app:showAsAction="never"></item>
 </menu>

@@ -1,5 +1,8 @@
 package ic.aiczone.katologfilm.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -13,7 +16,7 @@ import ic.aiczone.katologfilm.utils.Tools;
  * Created by aic on 26/02/18.
  */
 
-public class Films {
+public class Films implements Parcelable {
 
     private int id;
     private String title;
@@ -21,24 +24,19 @@ public class Films {
     private String time;
     private String linkImage;
 
+    public Films() {}
+
     public Films(JSONObject object) {
 
         try {
             this.id = object.getInt("id");
             this.title = object.getString("title");
             String desc = object.getString("overview");
-            /*if(desc.length() > 100){
-                desc = desc.substring(0, 100) + "...";
-            }else if(desc.length() < 1){
-                desc = "";
-            }*/
             this.description = desc;
-            //this.time = Tools.getFormatTime(object.getString("release_date"));
             this.time = Tools.getLongFormat(object.getString("release_date"));
             this.linkImage = object.getString("poster_path");
 
         } catch (Exception e) {
-
             e.printStackTrace();
 
         }
@@ -83,4 +81,38 @@ public class Films {
     public void setLinkImage(String linkImage) {
         this.linkImage = linkImage;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.description);
+        dest.writeString(this.time);
+        dest.writeString(this.linkImage);
+    }
+
+    protected Films(Parcel in) {
+        this.id = in.readInt();
+        this.title = in.readString();
+        this.description = in.readString();
+        this.time = in.readString();
+        this.linkImage = in.readString();
+    }
+
+    public static final Parcelable.Creator<Films> CREATOR = new Parcelable.Creator<Films>() {
+        @Override
+        public Films createFromParcel(Parcel source) {
+            return new Films(source);
+        }
+
+        @Override
+        public Films[] newArray(int size) {
+            return new Films[size];
+        }
+    };
 }

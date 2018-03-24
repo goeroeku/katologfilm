@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +39,8 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        init();
+
         adapter = new FilmAdapter(this);
         adapter.notifyDataSetChanged();
         adapter.setOnItemClickListener(new FilmAdapter.OnItemClickListener() {
@@ -65,13 +66,12 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
         Bundle bundle = new Bundle();
         bundle.putString(EXTRAS_FILM, film);
 
-        getLoaderManager().initLoader(0, bundle, this);
+        //getLoaderManager().initLoader(0, bundle, this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
+    private void init() {
+        getSupportActionBar().setTitle(getString(R.string.lb_form_search));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -80,6 +80,8 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
         if(id == R.id.act_change_settings){
             Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
             startActivity(mIntent);
+        }else if (id == android.R.id.home) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -93,19 +95,17 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
             sFilm = args.getString(EXTRAS_FILM);
         }
 
-        return new AsyncTaskUtils(this, sFilm);
+        return new AsyncTaskUtils(getBaseContext(), sFilm, "");
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Films>> loader, ArrayList<Films> data) {
-
-        adapter.setData(data);
+    public void onLoadFinished(Loader<ArrayList<Films>> loader, ArrayList<Films> films) {
+        adapter.setData(films);
     }
 
     @Override
     public void onLoaderReset(Loader<ArrayList<Films>> loader) {
         adapter.setData(null);
-
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {

@@ -1,7 +1,22 @@
 <resources>
     <string name="app_name">Katolog Film</string>
-    <string name="lb_cari">Find</string>
-    <string name="lb_change_settings">Change Settings</string>
+
+    <string name="lb_form_search">Search Movies</string>
+    <string name="lb_form_detail">Detail Movie</string>
+    <string name="lb_form_catalogue">Catalogue Movies</string>
+
+    <string name="lb_menu_find">Search Movies</string>
+    <string name="lb_menu_change_settings">Change Settings</string>
+
+    <string name="lb_button_find">Find</string>
+    <string name="lb_button_favorite">Favorite</string>
+    <string name="lb_button_share">Share</string>
+
+    <string name="lb_tab_now">Now Playing</string>
+    <string name="lb_tab_next">Upcoming</string>
 
     <string name="hint_cari">Enter movie title</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
