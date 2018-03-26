@@ -9,7 +9,7 @@
     <string name="lb_menu_change_settings">Change Settings</string>
 
     <string name="lb_button_find">Find</string>
-    <string name="lb_button_favorite">Favorite</string>
+    <string name="lb_button_detail">Details</string>
     <string name="lb_button_share">Share</string>
 
     <string name="lb_tab_now">Now Playing</string>

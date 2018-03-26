@@ -1,6 +1,7 @@
 package ic.aiczone.katologfilm.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import ic.aiczone.katologfilm.DetailActivity;
 import ic.aiczone.katologfilm.R;
 import ic.aiczone.katologfilm.models.Films;
 
@@ -67,10 +70,14 @@ public class CardViewFilmsAdapter extends RecyclerView.Adapter<CardViewFilmsAdap
         }
         holder.tvRemarks.setText(desc);
 
-        holder.btnFavorite.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
+        holder.btnDetail.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
-                Toast.makeText(context, "Favorite " + getListFilms().get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Favorite " + getListFilms().get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                Intent v = new Intent(context, DetailActivity.class);
+                Gson gson = new Gson();
+                v.putExtra("film", gson.toJson(getListFilms().get(position)));
+                context.startActivity(v);
             }
         }));
 
@@ -92,14 +99,14 @@ public class CardViewFilmsAdapter extends RecyclerView.Adapter<CardViewFilmsAdap
     class CardViewViewHolder extends RecyclerView.ViewHolder {
         ImageView imgPhoto;
         TextView tvName, tvRemarks;
-        Button btnFavorite, btnShare;
+        Button btnDetail, btnShare;
 
         CardViewViewHolder(View itemView) {
             super(itemView);
             imgPhoto = itemView.findViewById(R.id.img_item_photo);
             tvName = itemView.findViewById(R.id.tv_item_name);
             tvRemarks = itemView.findViewById(R.id.tv_item_remarks);
-            btnFavorite = itemView.findViewById(R.id.btn_set_favorite);
+            btnDetail = itemView.findViewById(R.id.btn_set_detail);
             btnShare = itemView.findViewById(R.id.btn_set_share);
         }
     }
