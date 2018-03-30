@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ic.aiczone.katologfilm.adapter.FilmAdapter;
 import ic.aiczone.katologfilm.models.Films;
 import ic.aiczone.katologfilm.utils.AsyncTaskUtils;
@@ -27,10 +29,11 @@ import ic.aiczone.katologfilm.utils.AsyncTaskUtils;
 
 public class SearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Films>> {
 
-    ListView listView;
+    @BindView(R.id.listView) ListView listView;
+    @BindView(R.id.edCari) EditText edCari;
+    @BindView(R.id.bnCari) Button bnCari;
+
     FilmAdapter adapter;
-    EditText edCari;
-    Button bnCari;
 
     static final String EXTRAS_FILM = "EXTRAS_FILM";
 
@@ -53,12 +56,8 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
                 startActivity(v);
             }
         });
-        listView = findViewById(R.id.listView);
 
         listView.setAdapter(adapter);
-
-        edCari = findViewById(R.id.edCari);
-        bnCari = findViewById(R.id.bnCari);
 
         bnCari.setOnClickListener(myListener);
 
@@ -72,6 +71,7 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
     private void init() {
         getSupportActionBar().setTitle(getString(R.string.lb_form_search));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ButterKnife.bind(this);
     }
 
     @Override
