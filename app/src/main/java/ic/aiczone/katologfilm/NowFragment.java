@@ -13,14 +13,14 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import ic.aiczone.katologfilm.adapter.CardViewFilmsAdapter;
-import ic.aiczone.katologfilm.models.Films;
+import ic.aiczone.katologfilm.models.FilmModel;
 import ic.aiczone.katologfilm.utils.AsyncTaskUtilsFragment;
 
 /**
  * Created by aic on 24/03/18.
  */
 
-public class NowFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<Films>> {
+public class NowFragment extends Fragment implements LoaderManager.LoaderCallbacks<ArrayList<FilmModel>> {
 
     private String ARG_PARCEL_LIST = "bundle_films";
     CardViewFilmsAdapter cardViewFilmsAdapter;
@@ -51,7 +51,7 @@ public class NowFragment extends Fragment implements LoaderManager.LoaderCallbac
     }
 
     @Override
-    public Loader<ArrayList<Films>> onCreateLoader(int id, Bundle args) {
+    public Loader<ArrayList<FilmModel>> onCreateLoader(int id, Bundle args) {
         String sFilm = "";
         if (args != null) {
             sFilm = args.getString(ARG_PARCEL_LIST);
@@ -61,12 +61,12 @@ public class NowFragment extends Fragment implements LoaderManager.LoaderCallbac
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Films>> loader, ArrayList<Films> data) {
+    public void onLoadFinished(Loader<ArrayList<FilmModel>> loader, ArrayList<FilmModel> data) {
         cardViewFilmsAdapter.setListFilms(data);
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList<Films>> loader) {
+    public void onLoaderReset(Loader<ArrayList<FilmModel>> loader) {
         cardViewFilmsAdapter.setListFilms(null);
     }
 }

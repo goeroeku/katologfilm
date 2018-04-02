@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
-import ic.aiczone.katologfilm.models.Films;
+import ic.aiczone.katologfilm.models.FilmModel;
 
 import static ic.aiczone.katologfilm.BuildConfig.API_KEY;
 import static ic.aiczone.katologfilm.BuildConfig.API_URL;
@@ -22,8 +22,8 @@ import static ic.aiczone.katologfilm.BuildConfig.API_URL;
  * Created by aic on 26/02/18.
  */
 
-public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
-    private ArrayList<Films> mData;
+public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<FilmModel>> {
+    private ArrayList<FilmModel> mData;
     private boolean mHasResult = false;
 
     private String sFilms;
@@ -47,7 +47,7 @@ public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
     }
 
     @Override
-    public void deliverResult(final ArrayList<Films> data) {
+    public void deliverResult(final ArrayList<FilmModel> data) {
         mData = data;
         mHasResult = true;
         super.deliverResult(data);
@@ -67,10 +67,10 @@ public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
     //private static final String API_KEY = "dac2bd4943970f70319dd37e04836f27"; //di pindah ke build.gradle
 
     @Override
-    public ArrayList<Films> loadInBackground() {
+    public ArrayList<FilmModel> loadInBackground() {
         SyncHttpClient client = new SyncHttpClient();
 
-        final ArrayList<Films> filmItems = new ArrayList<>();
+        final ArrayList<FilmModel> filmItems = new ArrayList<>();
         //String url = "https://api.themoviedb.org/3/search/movie?api_key=" + API_KEY + "&language=en-US&query=" + sFilms;
         String sFilter = "";
         if (!sFilms.equals(""))
@@ -94,7 +94,7 @@ public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
 
                     for (int i = 0; i < list.length(); i++) {
                         JSONObject film = list.getJSONObject(i);
-                        Films oFilm = new Films(film);
+                        FilmModel oFilm = new FilmModel(film);
                         filmItems.add(oFilm);
                     }
                 } catch (Exception e) {
@@ -111,7 +111,7 @@ public class AsyncTaskUtils extends AsyncTaskLoader<ArrayList<Films>> {
         return filmItems;
     }
 
-    protected void onReleaseResources(ArrayList<Films> data) {
+    protected void onReleaseResources(ArrayList<FilmModel> data) {
 
     }
 }

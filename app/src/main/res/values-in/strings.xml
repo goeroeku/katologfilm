@@ -14,6 +14,7 @@
 
     <string name="lb_tab_now">Sedang diputar</string>
     <string name="lb_tab_next">Mendatang</string>
+    <string name="lb_tab_favorite">Favorit</string>
 
     <string name="hint_cari">Masukkan judul film</string>
 </resources>
