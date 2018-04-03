@@ -32,6 +32,7 @@ public class CatalogueActivity extends AppCompatActivity {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPagerAdapter.addFrag(new NowFragment(), getString(R.string.lb_tab_now));
         mViewPagerAdapter.addFrag(new NextFragment(), getString(R.string.lb_tab_next));
+        mViewPagerAdapter.addFrag(new FavoritFragment(), getString(R.string.lb_tab_favorite));
 
         mViewPager = findViewById(R.id.container);
         mViewPager.setAdapter(mViewPagerAdapter);

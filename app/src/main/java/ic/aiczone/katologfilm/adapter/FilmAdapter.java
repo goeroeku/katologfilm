@@ -13,7 +13,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ic.aiczone.katologfilm.R;
-import ic.aiczone.katologfilm.models.Films;
+import ic.aiczone.katologfilm.models.FilmModel;
+
+import static ic.aiczone.katologfilm.BuildConfig.IMAGE_URL;
 
 /**
  * Created by Emeth on 10/31/2016.
@@ -21,7 +23,7 @@ import ic.aiczone.katologfilm.models.Films;
 
 public class FilmAdapter extends BaseAdapter {
 
-    private ArrayList<Films> mData = new ArrayList<>();
+    private ArrayList<FilmModel> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private Context context;
 
@@ -33,19 +35,19 @@ public class FilmAdapter extends BaseAdapter {
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, Films obj, int position);
+        void onItemClick(View view, FilmModel obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = mItemClickListener;
     }
 
-    public void setData(ArrayList<Films> items) {
+    public void setData(ArrayList<FilmModel> items) {
         mData = items;
         notifyDataSetChanged();
     }
 
-    public void addItem(final Films item) {
+    public void addItem(final FilmModel item) {
         mData.add(item);
         notifyDataSetChanged();
     }
@@ -72,7 +74,7 @@ public class FilmAdapter extends BaseAdapter {
     }
 
     @Override
-    public Films getItem(int position) {
+    public FilmModel getItem(int position) {
         return mData.get(position);
     }
 
@@ -97,7 +99,7 @@ public class FilmAdapter extends BaseAdapter {
         }
         holder.tvTitle.setText(mData.get(position).getTitle());
         holder.ivCover.setImageResource(R.drawable.no_img);
-        String desc = mData.get(position).getDescription();
+        String desc = mData.get(position).getOverview();
         if (desc.length() < 1) {
             holder.tvDescription.setVisibility(View.GONE);
         } else {
@@ -111,8 +113,8 @@ public class FilmAdapter extends BaseAdapter {
         }
 
         holder.tvDescription.setText(desc);
-        holder.tvTime.setText(mData.get(position).getTime());
-        Picasso.with(context).load("http://image.tmdb.org/t/p/w185" + mData.get(position).getLinkImage()).into(holder.ivCover);
+        holder.tvTime.setText(mData.get(position).getRelease());
+        Picasso.with(context).load(IMAGE_URL + mData.get(position).getPosterPath()).into(holder.ivCover);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

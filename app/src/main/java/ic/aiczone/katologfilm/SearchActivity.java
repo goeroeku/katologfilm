@@ -13,21 +13,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ic.aiczone.katologfilm.adapter.FilmAdapter;
-import ic.aiczone.katologfilm.models.Films;
+import ic.aiczone.katologfilm.models.FilmModel;
 import ic.aiczone.katologfilm.utils.AsyncTaskUtils;
 
 /**
  * Created by aic on 26/02/18.
  */
 
-public class SearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Films>> {
+public class SearchActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<FilmModel>> {
 
     @BindView(R.id.listView) ListView listView;
     @BindView(R.id.edCari) EditText edCari;
@@ -35,7 +33,8 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
 
     FilmAdapter adapter;
 
-    static final String EXTRAS_FILM = "EXTRAS_FILM";
+    static final String ARG_PARCEL_FIND = "EXTRAS_FILM";
+    private String ARG_PARCEL_LIST = "bundle_films";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +47,9 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
         adapter.notifyDataSetChanged();
         adapter.setOnItemClickListener(new FilmAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, Films obj, int position) {
-                //Toast.makeText(getBaseContext(), Integer.toString(obj.getId()) + obj.getDescription(), Toast.LENGTH_SHORT).show();
+            public void onItemClick(View view, FilmModel obj, int position) {
                 Intent v = new Intent(getBaseContext(), DetailActivity.class);
-                Gson gson = new Gson();
-                v.putExtra("film", gson.toJson(obj));
+                v.putExtra(ARG_PARCEL_LIST, obj);
                 startActivity(v);
             }
         });
@@ -63,9 +60,9 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
 
         String film = edCari.getText().toString();
         Bundle bundle = new Bundle();
-        bundle.putString(EXTRAS_FILM, film);
+        bundle.putString(ARG_PARCEL_FIND, film);
 
-        //getLoaderManager().initLoader(0, bundle, this);
+        getLoaderManager().initLoader(0, bundle, this);
     }
 
     private void init() {
@@ -88,23 +85,23 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
     }
 
     @Override
-    public Loader<ArrayList<Films>> onCreateLoader(int id, Bundle args) {
+    public Loader<ArrayList<FilmModel>> onCreateLoader(int id, Bundle args) {
 
         String sFilm = "";
         if (args != null) {
-            sFilm = args.getString(EXTRAS_FILM);
+            sFilm = args.getString(ARG_PARCEL_FIND);
         }
 
         return new AsyncTaskUtils(getBaseContext(), sFilm, "");
     }
 
     @Override
-    public void onLoadFinished(Loader<ArrayList<Films>> loader, ArrayList<Films> films) {
+    public void onLoadFinished(Loader<ArrayList<FilmModel>> loader, ArrayList<FilmModel> films) {
         adapter.setData(films);
     }
 
     @Override
-    public void onLoaderReset(Loader<ArrayList<Films>> loader) {
+    public void onLoaderReset(Loader<ArrayList<FilmModel>> loader) {
         adapter.setData(null);
     }
 
@@ -116,7 +113,7 @@ public class SearchActivity extends AppCompatActivity implements LoaderManager.L
             if (TextUtils.isEmpty(film)) return;
 
             Bundle bundle = new Bundle();
-            bundle.putString(EXTRAS_FILM, film);
+            bundle.putString(ARG_PARCEL_FIND, film);
             getLoaderManager().restartLoader(0, bundle, SearchActivity.this);
         }
     };

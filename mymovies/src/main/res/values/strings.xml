@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Movies</string>
+
+    <string name="lb_form_detail">Movie Detail</string>
+    <string name="lb_form_favorite">Favorite Movie</string>
+
+    <string name="lb_button_detail">Detail</string>
+    <string name="lb_button_share">Share</string>
+</resources>
