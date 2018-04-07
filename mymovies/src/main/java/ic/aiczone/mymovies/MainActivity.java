@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.rv_category)
     RecyclerView rvCategory;
 
-    private String ARG_PARCEL_LIST = "bundle_films";
     private final int LOAD_NOTES_ID = 110;
 
     private CardViewFilmsAdapter adapter;

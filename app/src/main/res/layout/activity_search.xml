@@ -21,7 +21,7 @@
             android:id="@+id/edCari"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_cari"
+            android:hint="@string/hint_search"
             android:layout_weight="0.8"/>
         <Button
             android:id="@+id/bnCari"

@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,8 +30,6 @@ import static ic.aiczone.mymovies.entity.DatabaseContract.CONTENT_URI;
 public class CardViewFilmsAdapter extends RecyclerView.Adapter<CardViewFilmsAdapter.CardViewViewHolder> {
     private Cursor mFilms;
     private Context context;
-
-    private String ARG_PARCEL_LIST = "bundle_films";
 
     public CardViewFilmsAdapter(Context context) {
         this.context = context;
@@ -86,7 +83,14 @@ public class CardViewFilmsAdapter extends RecyclerView.Adapter<CardViewFilmsAdap
         holder.btnShare.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
-                Toast.makeText(context, "Share " + film.getTitle(), Toast.LENGTH_SHORT).show();
+                String mPesan = holder.btnShare.getContext().getResources().getString(R.string.app_name);
+                mPesan += "\n" + film.getTitle();
+                Intent v = new Intent();
+                v.setType("text/plain");
+                v.setAction(Intent.ACTION_SEND);
+                v.putExtra(Intent.EXTRA_TEXT, mPesan);
+                holder.btnShare.getContext().startActivity(Intent.createChooser(v, mPesan));
+                holder.btnShare.getContext().getResources().getString(R.string.lb_button_send_to);
             }
         }));
     }

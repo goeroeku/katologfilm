@@ -23,7 +23,6 @@ import static ic.aiczone.katologfilm.provider.DatabaseContract.CONTENT_URI;
 public class FavoritFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private String ARG_PARCEL_LIST = "bundle_films";
     private CardViewCursorAdapter adapter;
 
     public FavoritFragment() {

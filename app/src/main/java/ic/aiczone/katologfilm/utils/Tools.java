@@ -2,6 +2,7 @@ package ic.aiczone.katologfilm.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -19,16 +20,35 @@ public class Tools {
         return sTime;
     }
 
-    public static String getLongFormat(String time){
-        SimpleDateFormat form_src=new SimpleDateFormat("yyyy-MM-dd");
+    public static String getLongFormat(String time) {
+        SimpleDateFormat form_src = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date tTime=form_src.parse(time);
-            SimpleDateFormat form_dst=new SimpleDateFormat("EEEE, MMM dd, yyyy");
+            Date tTime = form_src.parse(time);
+            SimpleDateFormat form_dst = new SimpleDateFormat("EEEE, MMM dd, yyyy");
             return form_dst.format(tTime);
         } catch (ParseException e) {
             e.printStackTrace();
             return time;
         }
 
+    }
+
+    public static boolean currentDate(String date) {
+        SimpleDateFormat form_src = new SimpleDateFormat("yyyy-MM-dd");
+        Date mDate = null;
+        Date mCoba = null;
+        Date mCoba1 = null;
+        try {
+            mDate = form_src.parse(date);
+            mCoba = form_src.parse("2017-10-27");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (mCoba.equals(mDate) || mCoba1.equals(mDate)) {
+        /*if (mCoba.equals(mDate)) {*/
+            return true;
+        } else {
+            return false;
+        }
     }
 }

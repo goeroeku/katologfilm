@@ -5,9 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -16,6 +19,7 @@ import butterknife.ButterKnife;
 import ic.aiczone.mymovies.models.FilmModel;
 
 import static ic.aiczone.mymovies.BuildConfig.IMAGE_URL;
+import static ic.aiczone.mymovies.entity.DatabaseContract.CONTENT_URI;
 
 public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.tvTitle)
@@ -33,6 +37,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private FilmModel film;
 
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,14 @@ public class DetailActivity extends AppCompatActivity {
     private void init() {
         getSupportActionBar().setTitle(getString(R.string.lb_form_detail));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        bnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.startAnimation(buttonClick);
+                delFavorite();
+            }
+        });
     }
 
     private void loadData() {
@@ -75,6 +89,16 @@ public class DetailActivity extends AppCompatActivity {
             tvPopularity.setText(film.getPopularity());
             bnFavorite.setBackground(getDrawable(R.drawable.ic_favorite_black));
         }
+    }
+
+    private void delFavorite() {
+        getContentResolver().delete(
+                Uri.parse(CONTENT_URI + "/" + film.getId()),
+                null,
+                null
+        );
+        Toast.makeText(this, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

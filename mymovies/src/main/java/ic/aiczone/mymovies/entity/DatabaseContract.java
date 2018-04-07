@@ -18,7 +18,6 @@ public class DatabaseContract {
         public static String OVERVIEW = "overview";
         public static String POPULARITY = "popularity";
         public static String POSTER_PATH = "posterPath";
-        public static String BACKDROP_PATH = "backdropPath";
     }
 
     public static final String AUTHORITY = "ic.aiczone.katologfilm";
@@ -34,9 +33,5 @@ public class DatabaseContract {
 
     public static int getColumnInt(Cursor cursor, String columnName) {
         return cursor.getInt(cursor.getColumnIndex(columnName));
-    }
-
-    public static long getColumnLong(Cursor cursor, String columnName) {
-        return cursor.getLong(cursor.getColumnIndex(columnName));
     }
 }

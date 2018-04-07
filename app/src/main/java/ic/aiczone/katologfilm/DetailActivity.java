@@ -19,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ic.aiczone.katologfilm.database.FavoriteHelper;
 import ic.aiczone.katologfilm.models.FilmModel;
+import ic.aiczone.katologfilm.utils.Tools;
 
 import static android.provider.BaseColumns._ID;
 import static ic.aiczone.katologfilm.BuildConfig.IMAGE_URL;
@@ -74,7 +75,8 @@ public class DetailActivity extends AppCompatActivity {
             if (film != null) {
                 Picasso.with(this).load(IMAGE_URL + film.getPosterPath()).into(igPoster);
                 tvTitle.setText(film.getTitle());
-                tvRelease.setText(film.getRelease());
+                String mRelease = Tools.getLongFormat(film.getRelease());
+                tvRelease.setText(mRelease);
                 tvOverview.setText(film.getOverview());
                 tvPopularity.setText(film.getPopularity());
             }
@@ -130,7 +132,8 @@ public class DetailActivity extends AppCompatActivity {
         cv.put(_ID, film.getId());
         cv.put(POSTER_PATH, film.getPosterPath());
         cv.put(TITLE, film.getTitle());
-        cv.put(RELEASE, film.getRelease());
+        String mRelease = Tools.getLongFormat(film.getRelease());
+        cv.put(RELEASE, mRelease);
         cv.put(OVERVIEW, film.getOverview());
         cv.put(POPULARITY, film.getPopularity());
 

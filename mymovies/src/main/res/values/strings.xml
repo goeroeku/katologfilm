@@ -6,4 +6,5 @@
 
     <string name="lb_button_detail">Detail</string>
     <string name="lb_button_share">Share</string>
+    <string name="lb_button_send_to">Send To</string>
 </resources>
