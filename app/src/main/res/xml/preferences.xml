@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/lb_act_notification">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_reminder_daily"
+            android:summary="@string/lb_daily_reminder_summary"
+            android:title="@string/lb_daily_reminder_title" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_reminder_upcoming"
+            android:summary="@string/lb_upcoming_reminder_summary"
+            android:title="@string/lb_upcoming_reminder_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/lb_act_settings">
+
+        <Preference
+            android:key="@string/key_setting_locale"
+            android:summary="@string/lb_setting_locale_summary"
+            android:title="@string/lb_setting_locale_title" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -20,7 +20,7 @@ import static ic.aiczone.mymovies.entity.DatabaseContract.getColumnString;
 
 public class FilmModel implements Parcelable {
     private int id;
-    private String title, release, overview, popularity, backdropPath, posterPath;
+    private String title, release, overview, popularity, posterPath;
 
     public int getId() {
         return id;
@@ -60,14 +60,6 @@ public class FilmModel implements Parcelable {
 
     public void setPopularity(String popularity) {
         this.popularity = popularity;
-    }
-
-    public String getBackdropPath() {
-        return backdropPath;
-    }
-
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
     }
 
     public String getPosterPath() {
@@ -120,7 +112,6 @@ public class FilmModel implements Parcelable {
         dest.writeString(this.release);
         dest.writeString(this.overview);
         dest.writeString(this.popularity);
-        dest.writeString(this.backdropPath);
         dest.writeString(this.posterPath);
     }
 
@@ -130,7 +121,6 @@ public class FilmModel implements Parcelable {
         this.release = in.readString();
         this.overview = in.readString();
         this.popularity = in.readString();
-        this.backdropPath = in.readString();
         this.posterPath = in.readString();
     }
 

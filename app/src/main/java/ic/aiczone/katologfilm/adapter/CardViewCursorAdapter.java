@@ -90,7 +90,14 @@ public class CardViewCursorAdapter extends RecyclerView.Adapter<CardViewCursorAd
         holder.btnShare.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
             @Override
             public void onItemClicked(View view, int position) {
-                Toast.makeText(context, "Share " + film.getTitle(), Toast.LENGTH_SHORT).show();
+                String mPesan = holder.btnShare.getContext().getResources().getString(R.string.app_name);
+                mPesan += "\n" + film.getTitle();
+                Intent v = new Intent();
+                v.setType("text/plain");
+                v.setAction(Intent.ACTION_SEND);
+                v.putExtra(Intent.EXTRA_TEXT, mPesan);
+                holder.btnShare.getContext().startActivity(Intent.createChooser(v, mPesan));
+                holder.btnShare.getContext().getResources().getString(R.string.lb_button_send_to);
             }
         }));
     }

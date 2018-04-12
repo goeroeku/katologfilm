@@ -3,6 +3,7 @@
     package="ic.aiczone.mymovies">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-permission android:name="ic.aiczone.katologfilm.READ_DATABASE" />
     <uses-permission android:name="ic.aiczone.katologfilm.WRITE_DATABASE" />

@@ -3,6 +3,9 @@
     package="ic.aiczone.katologfilm">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <permission
         android:name="ic.aiczone.katologfilm.READ_DATABASE"
@@ -20,6 +23,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SearchActivity" />
         <activity android:name=".DetailActivity" />
+        <activity android:name=".SettingsActivity" />
         <activity
             android:name=".CatalogueActivity"
             android:label="@string/lb_form_catalogue"
@@ -37,6 +41,31 @@
             android:exported="true"
             android:readPermission="ic.aiczone.katologfilm.READ_DATABASE"
             android:writePermission="ic.aiczone.katologfilm.WRITE_DATABASE" />
+
+        <receiver android:name=".widgets.FavoriteWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favorite_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widgets.StackWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"></service>
+
+        <service
+            android:name=".services.SchedulerTask"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".utils.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

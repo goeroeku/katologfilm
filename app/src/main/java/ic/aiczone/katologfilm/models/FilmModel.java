@@ -8,18 +8,18 @@ import org.json.JSONObject;
 
 import ic.aiczone.katologfilm.utils.Tools;
 
-import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns._ID;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns.OVERVIEW;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns.POPULARITY;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns.POSTER_PATH;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns.RELEASE;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns.TITLE;
+import static ic.aiczone.katologfilm.provider.DatabaseContract.FavoriteColumns._ID;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.getColumnInt;
 import static ic.aiczone.katologfilm.provider.DatabaseContract.getColumnString;
 
 public class FilmModel implements Parcelable {
     private int id;
-    private String title, release, overview, popularity, backdropPath, posterPath;
+    private String title, release, overview, popularity, posterPath;
 
     public int getId() {
         return id;
@@ -61,14 +61,6 @@ public class FilmModel implements Parcelable {
         this.popularity = popularity;
     }
 
-    public String getBackdropPath() {
-        return backdropPath;
-    }
-
-    public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
-    }
-
     public String getPosterPath() {
         return posterPath;
     }
@@ -95,7 +87,8 @@ public class FilmModel implements Parcelable {
             this.id = object.getInt("id");
             this.posterPath = object.getString("poster_path");
             this.title = object.getString("title");
-            this.release = Tools.getLongFormat(object.getString("release_date"));
+            //this.release = Tools.getLongFormat(object.getString("release_date"));
+            this.release = object.getString("release_date");
             String desc = object.getString("overview");
             this.overview = desc;
             this.popularity = object.getString("popularity");
@@ -118,7 +111,6 @@ public class FilmModel implements Parcelable {
         dest.writeString(this.release);
         dest.writeString(this.overview);
         dest.writeString(this.popularity);
-        dest.writeString(this.backdropPath);
         dest.writeString(this.posterPath);
     }
 
@@ -128,7 +120,6 @@ public class FilmModel implements Parcelable {
         this.release = in.readString();
         this.overview = in.readString();
         this.popularity = in.readString();
-        this.backdropPath = in.readString();
         this.posterPath = in.readString();
     }
 

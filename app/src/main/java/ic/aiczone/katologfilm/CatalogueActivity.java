@@ -63,7 +63,9 @@ public class CatalogueActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.act_change_settings) {
-            Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            /*Intent mIntent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+            startActivity(mIntent);*/
+            Intent mIntent = new Intent(getBaseContext(), SettingsActivity.class);
             startActivity(mIntent);
         } else if (id == R.id.act_cari) {
             Intent v = new Intent(getBaseContext(), SearchActivity.class);

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import ic.aiczone.katologfilm.R;
 import ic.aiczone.katologfilm.models.FilmModel;
+import ic.aiczone.katologfilm.utils.Tools;
 
 import static ic.aiczone.katologfilm.BuildConfig.IMAGE_URL;
 
@@ -113,7 +114,8 @@ public class FilmAdapter extends BaseAdapter {
         }
 
         holder.tvDescription.setText(desc);
-        holder.tvTime.setText(mData.get(position).getRelease());
+        String mRelease = Tools.getLongFormat(mData.get(position).getRelease());
+        holder.tvTime.setText(mRelease);
         Picasso.with(context).load(IMAGE_URL + mData.get(position).getPosterPath()).into(holder.ivCover);
 
         convertView.setOnClickListener(new View.OnClickListener() {

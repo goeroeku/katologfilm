@@ -8,13 +8,41 @@
     <string name="lb_menu_find">Cari Firm</string>
     <string name="lb_menu_change_settings">Ganti Pengaturan</string>
 
+    <string name="lb_act_settings">Settings</string>
+    <string name="lb_act_notification">Notification</string>
+
     <string name="lb_button_find">Cari</string>
     <string name="lb_button_detail">Detail</string>
     <string name="lb_button_share">Bagikan</string>
+    <string name="lb_button_send_to">Kirim Ke</string>
 
     <string name="lb_tab_now">Sedang diputar</string>
     <string name="lb_tab_next">Mendatang</string>
     <string name="lb_tab_favorite">Favorit</string>
 
-    <string name="hint_cari">Masukkan judul film</string>
+    <string name="lb_daily_reminder">Notifikasi pengingat harian</string>
+    <string name="lb_daily_reminder_title">Notifikasi Pengingat Harian</string>
+    <string name="lb_daily_reminder_summary">Hidupkan/matikan pengingat harian</string>
+
+    <string name="lb_upcoming_reminder">Notifikasi penginat Film berikutnya</string>
+    <string name="lb_upcoming_reminder_title">Notifikasi Penginat Film Berikutnya</string>
+    <string name="lb_upcoming_reminder_summary">Hidupkan/matikan pengingat film berikutnya</string>
+
+    <string name="lb_activated">telah aktif!</string>
+    <string name="lb_deactivated">tidak aktif!</string>
+
+    <string name="lb_setting_locale_title">Pengaturan Lokalisasi</string>
+    <string name="lb_setting_locale_summary">Pengaturan lokalisasi handphone kamu</string>
+
+    <string name="lb_alarm_daily_reminder">Selamat pagi! Siapkah untuk melihat film baru hari ini?</string>
+
+    <string name="hint_search">Masukkan judul film</string>
+    <string name="hint_banner_widget">Baner Film Favorit</string>
+    <string name="hint_empty_text">Tidak ada data</string>
+
+    <string name="lb_col_title">Judul Film</string>
+
+    <string name="key_reminder_daily">reminder_daily</string>
+    <string name="key_reminder_upcoming">reminder_upcoming</string>
+    <string name="key_setting_locale">setting_locale</string>
 </resources>

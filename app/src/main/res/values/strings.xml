@@ -8,13 +8,41 @@
     <string name="lb_menu_find">Search Movies</string>
     <string name="lb_menu_change_settings">Change Settings</string>
 
+    <string name="lb_act_settings">Settings</string>
+    <string name="lb_act_notification">Notification</string>
+
     <string name="lb_button_find">Find</string>
     <string name="lb_button_detail">Details</string>
     <string name="lb_button_share">Share</string>
+    <string name="lb_button_send_to">Send To</string>
 
     <string name="lb_tab_now">Now Playing</string>
     <string name="lb_tab_next">Upcoming</string>
     <string name="lb_tab_favorite">Favorite</string>
 
-    <string name="hint_cari">Enter movie title</string>
+    <string name="lb_daily_reminder">Daily Reminder Notification is now</string>
+    <string name="lb_daily_reminder_title">Daily Reminder Notification</string>
+    <string name="lb_daily_reminder_summary">Turn on/off daily reminder</string>
+
+    <string name="lb_upcoming_reminder">Upcoming Reminder Notification is now</string>
+    <string name="lb_upcoming_reminder_title">Upcoming Reminder Notification</string>
+    <string name="lb_upcoming_reminder_summary">Turn on/off upcoming reminder</string>
+
+    <string name="lb_activated">activated!</string>
+    <string name="lb_deactivated">deactivated!</string>
+
+    <string name="lb_setting_locale_title">Setting Locale</string>
+    <string name="lb_setting_locale_summary">Change your phone localization</string>
+
+    <string name="lb_alarm_daily_reminder">Good morning! Ready to pick your new movies today?</string>
+
+    <string name="hint_search">Enter movie title</string>
+    <string name="hint_banner_widget">Favorite Movie Banner</string>
+    <string name="hint_empty_text">No Data</string>
+
+    <string name="lb_col_title">Movie Title</string>
+
+    <string name="key_reminder_daily">reminder_daily</string>
+    <string name="key_reminder_upcoming">reminder_upcoming</string>
+    <string name="key_setting_locale">setting_locale</string>
 </resources>
