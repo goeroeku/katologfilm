@@ -36,16 +36,18 @@ public class Tools {
     public static boolean currentDate(String date) {
         SimpleDateFormat form_src = new SimpleDateFormat("yyyy-MM-dd");
         Date mDate = null;
-        Date mCoba = null;
-        Date mCoba1 = null;
+        //Date mCoba = null;
+        //Date mCoba1 = null;
         try {
             mDate = form_src.parse(date);
-            mCoba = form_src.parse("2017-10-27");
+            //mCoba = form_src.parse("2017-10-27");
+            //mCoba1 = form_src.parse("2017-10-27");
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (mCoba.equals(mDate) || mCoba1.equals(mDate)) {
+        /*if (mCoba.equals(mDate) || mCoba1.equals(mDate)) {*/
         /*if (mCoba.equals(mDate)) {*/
+        if(new Date().equals(mDate)){
             return true;
         } else {
             return false;

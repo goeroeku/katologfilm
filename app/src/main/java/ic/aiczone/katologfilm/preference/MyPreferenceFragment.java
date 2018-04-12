@@ -10,7 +10,12 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.ButterKnife;
@@ -35,6 +40,9 @@ public class MyPreferenceFragment extends PreferenceFragment
     @BindString(R.string.key_setting_locale)
     String setting_locale;
 
+    private String mDaily = "07:00";
+    private String mNowMovie = "08:00";
+
     private AlarmReceiver alarmReceiver = new AlarmReceiver();
 
     private int jobId = 10;
@@ -55,8 +63,6 @@ public class MyPreferenceFragment extends PreferenceFragment
         findPreference(reminder_daily).setOnPreferenceChangeListener(this);
         findPreference(reminder_upcoming).setOnPreferenceChangeListener(this);
         findPreference(setting_locale).setOnPreferenceClickListener(this);
-
-        //schedulerTask = new SchedulerTask(getActivity());
     }
 
     @Override
@@ -67,7 +73,7 @@ public class MyPreferenceFragment extends PreferenceFragment
         if (key.equals(reminder_daily)) {
             if (isOn) {
                 alarmReceiver.setRepeatingAlarm(getActivity(), alarmReceiver.TYPE_REPEATING,
-                        "12:05", getString(R.string.lb_daily_reminder));
+                        mDaily, getString(R.string.lb_daily_reminder));
             } else {
                 alarmReceiver.cancelAlarm(getActivity(), alarmReceiver.TYPE_REPEATING);
             }
@@ -79,7 +85,10 @@ public class MyPreferenceFragment extends PreferenceFragment
 
         if (key.equals(reminder_upcoming)) {
             if (isOn) {
-                startJob();
+                /*startJob();*/
+                String dateNow = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+                alarmReceiver.setOneTimeAlarm(getActivity(), alarmReceiver.TYPE_ONE_TIME, dateNow,
+                        mNowMovie, getString(R.string.lb_upcoming_reminder));
             } else cancelJob();
 
             Toast.makeText(mContext, getString(R.string.lb_upcoming_reminder)
@@ -103,18 +112,19 @@ public class MyPreferenceFragment extends PreferenceFragment
         return false;
     }
 
-    private void startJob() {
+    public void startJob() {
         ComponentName mServiceComponent = new ComponentName(mContext, SchedulerTask.class);
 
         JobInfo.Builder builder = new JobInfo.Builder(jobId, mServiceComponent);
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
         builder.setRequiresDeviceIdle(false);
         builder.setRequiresCharging(false);
-        /*builder.setPeriodic(AlarmManager.INTERVAL_DAY);*/
-        builder.setPeriodic(2000);
+        builder.setPeriodic(AlarmManager.INTERVAL_DAY);
+        /*builder.setPeriodic(1000);*/
 
         JobScheduler jobScheduler = (JobScheduler) mContext.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.schedule(builder.build());
+        Log.d("startJob", "mulai");
     }
 
     private void cancelJob() {

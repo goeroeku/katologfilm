@@ -15,6 +15,7 @@ import android.util.Log;
 import java.util.Calendar;
 
 import ic.aiczone.katologfilm.CatalogueActivity;
+import ic.aiczone.katologfilm.DetailActivity;
 import ic.aiczone.katologfilm.R;
 import ic.aiczone.katologfilm.preference.MyPreferenceFragment;
 
@@ -45,25 +46,43 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         title = context.getResources().getString(R.string.app_name);
 
-        showAlarmNotification(context, title, message, notifId);
+        if(type.equalsIgnoreCase(TYPE_ONE_TIME)){
+            MyPreferenceFragment myPreference = new MyPreferenceFragment();
+            myPreference.setContext(context);
+            myPreference.startJob();
+            /*showAlarmNotification(context, title, message, notifId);*/
+        }else{
+            showAlarmNotification(context, title, message, notifId);
+        }
     }
 
     private void showAlarmNotification(Context context, String title, String message, int notifId) {
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Intent intent = new Intent(context, CatalogueActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, notifId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_reply_black_24dp)
-                .setContentTitle(title)
-                .setContentText(message)
-                .setColor(ContextCompat.getColor(context, android.R.color.transparent))
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                .setSound(alarmSound);
+        NotificationCompat.Builder builder;
+        if(notifId == NOTIF_ID_ONETIME){
+            builder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.ic_reply_black_24dp)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setColor(ContextCompat.getColor(context, android.R.color.transparent))
+                    .setAutoCancel(true)
+                    .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
+                    .setSound(alarmSound);
+        }else{
+            Intent intent = new Intent(context, CatalogueActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, notifId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.ic_reply_black_24dp)
+                    .setContentTitle(title)
+                    .setContentText(message)
+                    .setColor(ContextCompat.getColor(context, android.R.color.transparent))
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
+                    .setSound(alarmSound);
+        }
 
         notificationManagerCompat.notify(notifId, builder.build());
     }
@@ -90,6 +109,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        /*alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1 * 1000, pendingIntent);*/
     }
 
     public void setRepeatingAlarm(Context context, String type, String time, String message) {
@@ -111,8 +131,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         int requestCode = NOTIF_ID_REPEATING;
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1 * 1000, AlarmManager.INTERVAL_DAY, pendingIntent);
-        /*alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);*/
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        /*alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 1 * 1000, AlarmManager.INTERVAL_DAY, pendingIntent);*/
     }
 
     public void cancelAlarm(Context context, String type) {

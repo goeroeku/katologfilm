@@ -100,7 +100,7 @@ public class SchedulerTask extends JobService {
     }
 
     private void showNotification(Context context, String title, String message, int notifId, FilmModel film) {
-    /*private void showNotification(Context context, String title, String message, int notifId) {*/
+        /*private void showNotification(Context context, String title, String message, int notifId) {*/
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(ARG_PARCEL_LIST, film);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, notifId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -113,6 +113,7 @@ public class SchedulerTask extends JobService {
                 .setContentText(message)
                 .setColor(ContextCompat.getColor(context, android.R.color.transparent))
                 .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setSound(alarmSound);
 
