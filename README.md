@@ -1,7 +1,7 @@
 # KatologFilm
 Apps Katalog Film dari themoviedb.org, nama aplikasinya KatologFilm (korban typo)
 
-sponsored by Program MADE
+sponsored by Program MADE Dicoding
 
 ** note **
 =
